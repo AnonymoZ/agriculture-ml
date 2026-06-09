@@ -1,10 +1,15 @@
 import math
 import time
 
-from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
+from fastapi import APIRouter, HTTPException, Depends
+from app.utils.get_principal import get_current_principal
 
-router = APIRouter(prefix="", tags=["unit-conversion"])
+router = APIRouter(
+  prefix="",
+  tags=["unit-conversion"],
+  dependencies=[Depends(get_current_principal)],
+)
 
 MAX_TUTORIAL_MILES = 100_000
 

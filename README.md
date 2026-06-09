@@ -107,12 +107,27 @@ Each endpoint returns JSON like:
 
 ### Add JSON content type (and optionally your auth token)
 
+```markdown
+## Headers & Authentication (common to all)
+
+All HTTP endpoints under `/miles-to-kilometers` require a shared API key
+sent as a Bearer token:
+
 ```txt
 -H "Content-Type: application/json"
--H "Authorization: Bearer <TOKEN>"
-```
+-H "Authorization: Bearer <APP_API_KEY>"
 
-Our server doesn't require auth yet, we can omit the **Authorization** header.
+<APP_API_KEY> must match the value of APP_API_KEY in the server's .env.
+Missing or wrong key returns 401. See "Configure the API key" below.
+
+## Specifically testing the miles-to-km tool:
+
+```bash
+curl -X POST http://localhost:8003/miles-to-kilometers ^
+  -H "Content-Type: application/json" ^
+  -H "Authorization: Bearer <YOUR_KEY>" ^
+  -d "{\"miles\":10}"
+```
 
 ## Use with MCP (VS Code Example)
 
