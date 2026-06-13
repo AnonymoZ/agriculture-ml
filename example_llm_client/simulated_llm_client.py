@@ -19,7 +19,6 @@ load_dotenv()
 # Configuration
 API_KEY = os.getenv("GEMINI_API_KEY")
 MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
-APP_KEY = os.environ.get("APP_API_KEY")
 
 
 def get_available_tools() -> list[dict[str, Any]]:
@@ -64,10 +63,7 @@ def handle_manual_tool_call(call: Any) -> dict[str, Any]:
     print(f"\n[Tool Requested: {call.name}]")
     print("\n--- ACTION REQUIRED ---")
     print(
-    f"curl -X POST http://localhost:8003/miles-to-kilometers ^\n"
-    f'  -H "Content-Type: application/json" ^\n'
-    f'  -H "Authorization: Bearer {APP_API_KEY}" ^\n'
-    f'  -d "{call.args}"'
+        f"Run: curl -X POST http://localhost:8003/miles-to-kilometers -d '{call.args}'"
     )
 
     mcp_result = input("Enter the 'result' from the tool: ")

@@ -14,12 +14,6 @@ from app.mcp.mcp_resources.converter_resources import RESOURCE_DEFINITIONS
 from app.mcp.mcp_tools.miles_to_km import router as mile_to_km
 from app.utils.resource_utils import register_resources
 
-from dotenv import load_dotenv
-
-load_dotenv()
-if not os.environ.get("APP_API_KEY"):
-  raise RuntimeError("APP_API_KEY must be set in environment or .env")
-
 # FastAPI app for plain HTTP
 app = FastAPI(
     title="Unit Converter MCP Server",
